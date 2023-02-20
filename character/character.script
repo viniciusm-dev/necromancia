@@ -1,0 +1,61 @@
+local input = {
+	left = hash("left"),
+	right = hash("right"),
+	up = hash("up"),
+	down = hash("down")
+}
+
+local animation = {
+	idle = hash("idle"),
+	walking = hash("walking")
+}
+
+local move_speed = 50
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("camera", "acquire_camera_focus")
+	msg.post("@render:", "use_fixed_projection", { zoom = 4 })
+	
+	self.last_position = "right"
+	self.velocity = vmath.vector3(0, 0, 0)
+end
+
+function update(self, dt)
+	local current_position = go.get_position()
+	current_position = current_position + self.velocity * dt
+	go.set_position(current_position)
+
+	self.velocity = vmath.vector3(0, 0, 0)
+end
+
+function animate(self, pressed, released)
+	local direction = self.last_position ~= "right"
+	if pressed then
+		sprite.set_hflip("#sprite", direction)
+		sprite.play_flipbook("#sprite", animation.walking)
+	elseif released then
+		sprite.play_flipbook("#sprite", animation.idle)
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == input.left then
+		self.last_position = "left"
+		animate(self, action.pressed, action.released)
+		self.velocity.x = self.velocity.x + (move_speed * -1)
+	end
+	if action_id == input.right then
+		self.last_position = "right"
+		animate(self, action.pressed, action.released, flip_horizontal)
+		self.velocity.x = self.velocity.x + (move_speed * 1)
+	end
+	if action_id == input.up then
+		animate(self, action.pressed, action.released, flip_horizontal)
+		self.velocity.y = self.velocity.y + (move_speed * 1)
+	end
+	if action_id == input.down then
+		animate(self, action.pressed, action.released, flip_horizontal)
+		self.velocity.y = self.velocity.y + (move_speed * -1)
+	end
+end
