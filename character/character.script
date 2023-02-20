@@ -7,6 +7,8 @@ local camera = require "orthographic.camera"
 
 local CAMERA_ID = hash("/camera")
 local CHARACTER = hash("/character")
+local CREATURE = hash("/fungant")
+
 local input = {
 	left = hash("left"),
 	right = hash("right"),
@@ -19,6 +21,8 @@ local animation = {
 	walking = hash("walking")
 }
 
+local spell = {}
+
 
 local msg_contact_point_response = hash("contact_point_response")
 local obstacle = hash("obstacle")
@@ -26,18 +30,30 @@ local obstacle = hash("obstacle")
 local move_speed = 70
 
 function init(self)
+	spell.casting = false
+	spell.last_angle = 0
 	msg.post(".", "acquire_input_focus")
 	self.last_position = "right"
 	self.velocity = vmath.vector3(0, 0, 0)
 end
 
 function get_angle(a, b, c)
-	local ang = math.deg(math.atan2(c[2]-b[2], c[1]-b[1]) - math.atan2(a[2]-b[2], a[1]-b[1]))
+	local ang = math.deg(math.atan2(c.y-b.y, c.x-b.x) - math.atan2(a.y-b.y, a.x-b.x))
 	if ang < 0 then 
 		return ang + 360
 	else 
 		return ang
 	end
+end
+
+function cast_spell(initial_point, target_point, current_position)
+	local new_angle = get_angle(initial_point, target_point, current_position)
+
+	if spell.last_angle < new_angle then
+		spell.last_angle = new_angle
+	end
+
+	print(spell.last_angle)
 end
 
 function update(self, dt)
@@ -52,6 +68,10 @@ function update(self, dt)
 	local window_width, window_height = camera.get_window_size()
 	if world_position.x < 0 or world_position.x > window_width or world_position.y < 0 or world_position.y > window_height then
 		camera.follow(CAMERA_ID, CHARACTER,{ lerp = 0.5 })
+	end
+
+	if spell.casting then
+		cast_spell(spell.initial, spell.target, go.get_world_position(CHARACTER))
 	end
 end
 
@@ -90,5 +110,21 @@ function on_input(self, action_id, action)
 	if action_id == input.down then
 		animate(self, action.pressed, action.released, flip_horizontal)
 		self.velocity.y = self.velocity.y + (move_speed * -1)
+	end
+
+	if action_id == hash("spell") then
+		
+		if action.pressed then
+			if not spell.casting then 
+				spell.initial = go.get_world_position(CHARACTER) 
+				spell.target = go.get_world_position(CREATURE)
+				spell.casting = true
+			end
+			
+		elseif action.released then
+			spell.casting = false
+			spell.last_angle = 0
+			print("spell canceled")
+		end
 	end
 end
