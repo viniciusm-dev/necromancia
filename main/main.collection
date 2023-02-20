@@ -3,8 +3,8 @@ instances {
   id: "character"
   prototype: "/character/character.go"
   position {
-    x: 282.0
-    y: 207.0
+    x: 610.0
+    y: 307.0
     z: 1.0
   }
   rotation {
