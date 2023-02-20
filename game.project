@@ -1,5 +1,6 @@
 [bootstrap]
 main_collection = /main/main.collectionc
+render = /orthographic/render/orthographic.renderc
 
 [script]
 shared_state = 1
@@ -13,6 +14,9 @@ input_method = HiddenInputField
 
 [project]
 title = mage-slime
+dependencies#0 = https://github.com/britzl/defold-metrics/archive/master.zip
+dependencies#1 = https://github.com/britzl/defold-input/archive/master.zip
+dependencies#2 = https://github.com/britzl/defold-orthographic/archive/master.zip
 
 [graphics]
 default_texture_min_filter = nearest
@@ -20,4 +24,10 @@ default_texture_mag_filter = nearest
 
 [tilemap]
 max_tile_count = 2080
+
+[physics]
+debug = 0
+
+[library]
+include_dirs = 
 

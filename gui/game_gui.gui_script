@@ -1,0 +1,15 @@
+local fps = require "metrics.fps"
+
+
+function init(self)
+	self.fps_counter = fps.create()
+	self.fps_label = gui.get_node("fps_label")
+	
+end
+
+function update(self, dt)
+	self.fps_counter.update()
+
+	gui.set_text(self.fps_label, "FPS:" .. math.floor(self.fps_counter.fps()))
+	
+end

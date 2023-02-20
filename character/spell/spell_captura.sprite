@@ -1,0 +1,4 @@
+tile_set: "/character/spell/spell_captura.tilesource"
+default_animation: "anim"
+material: "/builtins/materials/sprite.material"
+blend_mode: BLEND_MODE_ALPHA

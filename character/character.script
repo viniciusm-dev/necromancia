@@ -1,3 +1,12 @@
+--[[
+local creature = require("shared.creature")
+creature.new()
+]]--
+
+local camera = require "orthographic.camera"
+
+local CAMERA_ID = hash("/camera")
+local CHARACTER = hash("/character")
 local input = {
 	left = hash("left"),
 	right = hash("right"),
@@ -10,23 +19,47 @@ local animation = {
 	walking = hash("walking")
 }
 
-local move_speed = 50
+
+local msg_contact_point_response = hash("contact_point_response")
+local obstacle = hash("obstacle")
+
+local move_speed = 70
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	msg.post("camera", "acquire_camera_focus")
-	msg.post("@render:", "use_fixed_projection", { zoom = 4 })
-	
 	self.last_position = "right"
 	self.velocity = vmath.vector3(0, 0, 0)
+end
+
+function get_angle(a, b, c)
+	local ang = math.deg(math.atan2(c[2]-b[2], c[1]-b[1]) - math.atan2(a[2]-b[2], a[1]-b[1]))
+	if ang < 0 then 
+		return ang + 360
+	else 
+		return ang
+	end
 end
 
 function update(self, dt)
 	local current_position = go.get_position()
 	current_position = current_position + self.velocity * dt
+	
 	go.set_position(current_position)
 
 	self.velocity = vmath.vector3(0, 0, 0)
+	
+	local world_position = camera.world_to_screen(cam_id, go.get_world_position())
+	local window_width, window_height = camera.get_window_size()
+	if world_position.x < 0 or world_position.x > window_width or world_position.y < 0 or world_position.y > window_height then
+		camera.follow(CAMERA_ID, CHARACTER,{ lerp = 0.5 })
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == msg_contact_point_response then
+		local newpos = go.get_position() + message.normal * message.distance
+		go.set_position(newpos)
+	end
 end
 
 function animate(self, pressed, released)

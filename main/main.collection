@@ -2,7 +2,6 @@ name: "main"
 instances {
   id: "character"
   prototype: "/character/character.go"
-  children: "camera"
   position {
     x: 282.0
     y: 207.0
@@ -40,12 +39,134 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "fungant"
+  prototype: "/creatures/fungant/fungant.go"
+  position {
+    x: 493.0
+    y: 302.0
+    z: 0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cursor"
+  prototype: "/character/cursor/cursor.go"
+  position {
+    x: -480.0
+    y: -270.0
+    z: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "capture"
+  prototype: "/creatures/capture/capture.go"
+  position {
+    x: 493.0
+    y: 297.0
+    z: 0.2
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spell_captura"
+  prototype: "/character/spell/spell_captura.go"
+  position {
+    x: 568.0
+    y: 298.0
+    z: 0.2
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "camera"
   data: "components {\n"
   "  id: \"camera\"\n"
-  "  component: \"/main/camera.camera\"\n"
+  "  component: \"/orthographic/camera.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"zoom\"\n"
+  "    value: \"3.0\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"projection\"\n"
+  "    value: \"FIXED_ZOOM\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"follow\"\n"
+  "    value: \"true\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"follow_target\"\n"
+  "    value: \"/character\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"follow_lerp\"\n"
+  "    value: \"0.5\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"game_interface\"\n"
+  "  component: \"/gui/game_interface.gui\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -62,8 +183,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: -480.0
-    y: -270.0
+    x: 0.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -73,8 +194,8 @@ embedded_instances {
     w: 1.0
   }
   scale3 {
-    x: 1.0E-6
-    y: 1.0E-6
-    z: 1.0E-6
+    x: 1.0
+    y: 1.0
+    z: 1.0
   }
 }

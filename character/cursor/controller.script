@@ -1,0 +1,27 @@
+local cursor = require "in.cursor"
+local camera = require "orthographic.camera"
+
+local CAMERA_ID = hash("/camera")
+local CREATURE = hash("creature")
+function init(self)
+	if not go.get("#cursor", "acquire_input_focus") then
+		self.forward_input = true
+		msg.post(".", "acquire_input_focus")
+	end
+end
+
+function on_input(self, action_id, action)
+	local screen = vmath.vector3(action.x, action.y, 0)
+	local world = camera.screen_to_world(CAMERA_ID, screen)
+	action.x = world.x
+	action.y = world.y
+	msg.post("#cursor", "input", { action_id = action_id, action = action })
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == cursor.CLICKED then
+		if message.group == CREATURE then
+			camera.follow(CAMERA_ID, message.id,{ lerp = 0.5 })
+		end
+	end
+end
