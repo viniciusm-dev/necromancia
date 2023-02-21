@@ -79,46 +79,6 @@ instances {
     z: 1.0
   }
 }
-instances {
-  id: "capture"
-  prototype: "/creatures/capture/capture.go"
-  position {
-    x: 493.0
-    y: 297.0
-    z: 0.2
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "spell_captura"
-  prototype: "/character/spell/spell_captura.go"
-  position {
-    x: 568.0
-    y: 298.0
-    z: 0.2
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "camera"
@@ -138,7 +98,7 @@ embedded_instances {
   "  }\n"
   "  properties {\n"
   "    id: \"zoom\"\n"
-  "    value: \"3.0\"\n"
+  "    value: \"2.0\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
   "  }\n"
   "  properties {\n"
@@ -179,6 +139,62 @@ embedded_instances {
   "    w: 1.0\n"
   "  }\n"
   "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "spell"
+  data: "embedded_components {\n"
+  "  id: \"cast\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/character/spell/spell_captura.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"complete\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/creatures/capture/capture.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
   "  }\n"
   "}\n"
   ""

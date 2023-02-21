@@ -1,0 +1,12 @@
+local CAMERA_ID = hash("/camera")
+local CHARACTER = hash("/character")
+local camera = require "orthographic.camera"
+
+local function anim_done(self, message_id, message, sender)
+	camera.follow(CAMERA_ID, CHARACTER,{ lerp = 0.1 })
+	go.delete()
+	go.delete("/fungant")
+end
+function init(self)
+	sprite.play_flipbook("#sprite", hash("complete"), anim_done)
+end

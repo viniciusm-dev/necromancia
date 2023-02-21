@@ -14,4 +14,9 @@ function math_utilities.round(number, decimals)
 	return math.floor(number * power) / power
 end
 
+function math_utilities.get_radius(center, outer)
+	-- circle equation
+	return math.sqrt(((outer.x - center.x) ^ 2) + ((outer.y - center.y) ^ 2))
+end
+
 return math_utilities

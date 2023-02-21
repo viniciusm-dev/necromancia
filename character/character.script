@@ -92,6 +92,6 @@ function on_input(self, action_id, action)
 	end
 
 	if action_id == spell.action_id then
-		spell.action(action.pressed, action.released, CHARACTER)
+		spell.action(action.pressed, action.released, CHARACTER, go.get_world_position(CREATURE))
 	end
 end
