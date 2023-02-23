@@ -17,8 +17,8 @@ embedded_components {
   id: "sprite"
   type: "sprite"
   data: "tile_set: \"/creatures/capture/capture.tilesource\"\n"
-  "default_animation: \"complete\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
+  "default_animation: \"3\"\n"
+  "material: \"/creatures/capture/material/capture.material\"\n"
   "blend_mode: BLEND_MODE_ADD\n"
   ""
   position {

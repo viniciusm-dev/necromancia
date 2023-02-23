@@ -3,8 +3,8 @@ instances {
   id: "character"
   prototype: "/character/character.go"
   position {
-    x: 610.0
-    y: 307.0
+    x: 255.0
+    y: 132.0
     z: 1.0
   }
   rotation {
@@ -98,7 +98,7 @@ embedded_instances {
   "  }\n"
   "  properties {\n"
   "    id: \"zoom\"\n"
-  "    value: \"2.0\"\n"
+  "    value: \"3.0\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
   "  }\n"
   "  properties {\n"

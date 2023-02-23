@@ -19,6 +19,7 @@ end
 function spell.finish(complete)
 	if complete then
 		local capture = factory.create("/spell#complete", spell.target)
+		msg.post("/fungant#controller", "captured")
 	end
 	if spell.factory_object then
 		go.delete(spell.factory_object)
